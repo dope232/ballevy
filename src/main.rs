@@ -23,7 +23,14 @@ use game::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+    .add_plugins(DefaultPlugins
+        .set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "Ballevy".to_string(),
+                ..Default::default()
+            }),
+            ..Default::default()
+        }))
         .add_state::<AppState>()
         .add_plugin(MainMenuPlugin)
         .add_plugin(GamePlugins)

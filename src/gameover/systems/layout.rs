@@ -154,7 +154,7 @@ pub fn build_game_over(
                     text: Text { 
                         sections: (
                             vec![TextSection::new(
-                                "Final score",
+                                "",
                                 TextStyle { 
                                     font: asset_server.load("fonts/DisposableDroidBB_bld.ttf"),
                                     font_size: 35.0,

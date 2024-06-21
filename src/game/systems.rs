@@ -291,9 +291,9 @@ pub fn update_enemy_direction(
         // Play SFX
         if direction_changed {
             // Play Sound Effect
-            let sound_effect_1 = asset_server.load("audio/pluck_001.ogg");
-            let sound_effect_2 = asset_server.load("audio/pluck_002.ogg");
-            // Randomly play one of the two sound effects.
+            let sound_effect_1 = asset_server.load("audio/block_hit.ogg");
+            let sound_effect_2 = asset_server.load("audio/block_hit.ogg");
+            
             let sound_effect = if random::<f32>() > 0.5 {
                 sound_effect_1
             } else {
@@ -319,13 +319,13 @@ pub fn confine_enemy_movement(
     for mut transform in enemy_query.iter_mut() {
         let mut translation = transform.translation;
 
-        // Bound the enemy x position
+        
         if translation.x < x_min {
             translation.x = x_min;
         } else if translation.x > x_max {
             translation.x = x_max;
         }
-        // Bound the enemy y position
+        
         if translation.y < y_min {
             translation.y = y_min;
         } else if translation.y > y_max {
@@ -354,7 +354,7 @@ pub fn enemy_hit_player(
             let enemy_radius = ENEMY_SIZE / 2.0;
             if distance < player_radius + enemy_radius {
                 println!("Enemy hit player! Game Over!");
-                let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
+                let sound_effect = asset_server.load("audio/game-over-38511.ogg");
                 audio.play(sound_effect);
                 commands.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver {score: score.value}); 
@@ -385,9 +385,9 @@ pub fn player_hitting_star(
             .distance(star_transform.translation); 
             
             if distance < PLAYER_SIZE/ 2.0 + STAR_SIZE / 2.0 {
-                println!("Player hit star"); 
+                 
                 score.value +=1; 
-                let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
+                let sound_effect = asset_server.load("audio/fruit.ogg");
                 audio.play(sound_effect);
                 commands.entity(star_entity).despawn(); 
 
@@ -402,7 +402,7 @@ pub fn player_hitting_star(
 
 pub fn update_score(score: ResMut<Score>) {
     if score.is_changed() {
-        println!("Score {}", score.value.to_string()); 
+        println!("{}", score.value.to_string()); 
 
     }
     
